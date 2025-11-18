@@ -9,17 +9,15 @@
 
 <p align="center">
 
-  <!-- Google Colab badge -->
-  <a href="https://colab.research.google.com/YOUR_NOTEBOOK_LINK">
+  <a href="https://colab.research.google.com/drive/1jJHC4HpZEuSOq6CaCesBxK_DqZXVWK0z?usp=sharing">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab">
   </a>
-
-  <!-- Zenodo DOI badge -->
-  <a href="https://doi.org/YOUR_DOI_HERE">
-    <img src="https://zenodo.org/badge/DOI/YOUR_DOI_HERE.svg" alt="DOI">
+  
+  <a href="https://doi.org/10.5281/zenodo.17350381">
+    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17350381.svg" alt="DOI"></a>
   </a>
 
-  <a href="https://your-project-website.com">
+  <a href="https://www.grass4b.com/_sub/">
   <img src="https://img.shields.io/badge/Grasslands4Biodiversity-Website-green" alt="Grasslands4Biodiversity">
 </a>
 
@@ -72,63 +70,23 @@ Hosted on **Zenodo**:
 ├── dataset.zip/               # Augmented and split images used for YOLO11 training and validation
 │   ├── train/                 # Training subset ≈ 60%
 │   │   ├── images/ 
-│   │   └── val/ 
+│   │   └── labels/ 
 │   ├── test/                  # Test subset ≈ 20%
-│   │   ├── train/
-│   │   └── val/ 
+│   │   ├── images/
+│   │   └── labels/ 
 │   ├── val/                   # Val subset ≈ 20%
-│   │   ├── train/
-│   │   └── val/ 
-│   └── dataset.yaml           # YAML file for training setup
-│
-│
-├── results.zip/               # Jupyter notebooks
-    └── EDA.ipynb              # Exploratory Data Analysis example
-
+│   │   ├── images/
+│   │   └── labels/ 
+│   └── dataset.yaml           # Configuration file specifying dataset paths, class names, and train/val/test splits for YOLO training
+│      
+├── YOLO11x_GMAI.pt            # PyTorch checkpoint of the YOLO11x model trained on the GMAI dataset
 ```
-
-Hosted on **GitHub**:
-
-```bash
-grassland-management-from-aerial-imagery/
-│
-├── readme.md                  # Project overview and instructions
-├── LICENSE                    # License file
-├── requirements.txt           # Python dependencies
-│
-├── assets/                    # Images, logos, and visual assets
-│   └── img/
-│       └── logo.png
-│
-├── data/                      # Datasets (raw and processed)
-│   ├── raw/                   # Original unprocessed data (e.g., aerial images)
-│   ├── processed/             # Preprocessed images for training/testing
-│   └── annotations/           # YOLO annotations or other labels
-│
-├── notebooks/                 # Jupyter notebooks
-│   └── EDA.ipynb              # Exploratory Data Analysis example
-│
-├── src/                       # Source code
-│   ├── models/                # Model architectures or scripts
-│   ├── utils/                 # Helper functions (preprocessing, metrics)
-│   └── train.py               # Training script
-│
-├── results/                   # Model outputs
-│   ├── predictions/           # Example inference results
-│   └── metrics/               # Evaluation metrics, plots
-│
-├── colab/                     # Google Colab notebooks (optional)
-│   └── GMAI_demo.ipynb
-│
-└── docs/                      # Documentation or supplementary info
-    └── paper/                 # Supplementary material for the pape
-```
-
-
+> **Note:**  
+> In *dataset.zip*, all files whose names end with a non-numeric character correspond to augmented data instances, while numeric suffixes indicate original samples.
 
 ## Usage
 
-Full workflow is in notebook.
+A full end-to-end workflow is available in the accompanying Google Colab notebook. It provides step-by-step code, methodological explanations, and the ability to replicate the workflow using included demo data.
 
 ## Results
 
@@ -136,15 +94,15 @@ Results of our study are hosted on Zenodo.
 
 **Predictions Across Slovak Orthophotomosaic Cycles**
 
-| Class           | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 |
-|-----------------|------|------|------|------|------|------|------|
-| **Cattle**       | 7,203  | 23,470 | 33,507 | 6,402  | 37,262 | 31,872 | 9,384 |
-| **Sheep**        | 5,074  | 77,426 | 97,192 | 8,143  | 83,338 | 60,419 | 5,486 |
-| **Horse**        | 1,028  | 1,502  | 468    | 894    | 1,454  | 1,367  | 1,747 |
-| **Round Haybale**| 2,764  | 30,634 | 40,014 | 7,465  | 56,751 | 27,802 | 5,760 |
-| **Square Haybale**| 148   | 362    | 971    | 84     | 820    | 174    | 12    |
-| **Haystack**     | 116    | 360    | 176    | 72     | 769    | 38     | 284   |
-| **Machinery**    | 206    | 401    | 455    | 249    | 596    | 278    | 242   |
+| Class           | 2017   | 2018   | 2019   | 2020  | 2021   | 2022   | 2023  |
+|-----------------|--------|--------|--------|-------|--------|--------|-------|
+| **Cattle**       | 7,203  | 23,470 | 33,507 | 6,402 | 37,262 | 31,872 | 10,056 |
+| **Sheep**        | 5,074  | 77,426 | 97,192 | 8,143 | 83,338 | 60,419 | 6,277  |
+| **Horse**        | 1,028  | 1,502  | 468    | 894   | 1,454  | 1,367  | 1,767  |
+| **Round Haybale**| 2,764  | 30,634 | 40,014 | 7,465 | 56,751 | 27,802 | 6,738  |
+| **Square Haybale**| 148   | 362    | 971    | 84    | 820    | 174    | 80     |
+| **Haystack**     | 116    | 360    | 176    | 72    | 769    | 38     | 301    |
+| **Machinery**    | 206    | 401    | 455    | 249   | 596    | 278    | 253    |
 
 ## Credits
 

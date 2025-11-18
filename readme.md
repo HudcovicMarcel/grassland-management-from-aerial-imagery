@@ -81,8 +81,6 @@ Hosted on **Zenodo**:
 │   │   └── val/ 
 │   └── dataset.yaml           # YAML file for training setup
 │
-├── raw.zip/                   # Original images and manually bounding boxes before augmentation
-│   ├── train/   
 │
 ├── results.zip/               # Jupyter notebooks
     └── EDA.ipynb              # Exploratory Data Analysis example
@@ -92,9 +90,9 @@ Hosted on **Zenodo**:
 Hosted on **GitHub**:
 
 ```bash
-dataset.zip/
+grassland-management-from-aerial-imagery/
 │
-├── README.md                  # Project overview and instructions
+├── readme.md                  # Project overview and instructions
 ├── LICENSE                    # License file
 ├── requirements.txt           # Python dependencies
 │
@@ -128,17 +126,32 @@ dataset.zip/
 
 
 
-## Download
+## Usage
 
-You can [download](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0) the latest installable version of Markdownify for Windows, macOS and Linux.
+Full workflow is in notebook.
 
+## Results
 
+Results of our study are hosted on Zenodo.
+
+**Predictions Across Slovak Orthophotomosaic Cycles**
+
+| Class           | 2017 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 |
+|-----------------|------|------|------|------|------|------|------|
+| **Cattle**       | 7,203  | 23,470 | 33,507 | 6,402  | 37,262 | 31,872 | 9,384 |
+| **Sheep**        | 5,074  | 77,426 | 97,192 | 8,143  | 83,338 | 60,419 | 5,486 |
+| **Horse**        | 1,028  | 1,502  | 468    | 894    | 1,454  | 1,367  | 1,747 |
+| **Round Haybale**| 2,764  | 30,634 | 40,014 | 7,465  | 56,751 | 27,802 | 5,760 |
+| **Square Haybale**| 148   | 362    | 971    | 84     | 820    | 174    | 12    |
+| **Haystack**     | 116    | 360    | 176    | 72     | 769    | 38     | 284   |
+| **Machinery**    | 206    | 401    | 455    | 249    | 596    | 278    | 242   |
 
 ## Credits
 
 - Aerial imagery is under **CC BY Creative Commons Attribution (GKÚ Bratislava, NLC) 4.0**.  
 - **YOLO11** model by **Ultralytics** (Jocher & Qiu, 2024).  
   Citation: Jocher, G. & Qiu, J. (2024). *Ultralytics YOLO11*, version 11.0.0. Available at: [https://github.com/ultralytics/ultralytics](https://github.com/ultralytics/ultralytics). License: AGPL-3.0.
+- README template adapted from **[Electron Markdownify](https://github.com/amitmerchant1990/electron-markdownify)** by Amit Merchant.
 
 
 ## License

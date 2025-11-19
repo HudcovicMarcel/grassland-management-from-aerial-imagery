@@ -9,7 +9,7 @@
 
 <p align="center">
 
-  <a href="https://colab.research.google.com/drive/1jJHC4HpZEuSOq6CaCesBxK_DqZXVWK0z?usp=sharing">
+  <a href="https://colab.research.google.com/github/HudcovicMarcel/grassland-management-from-aerial-imagery/blob/main/GMAI.ipynb">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab">
   </a>
   

@@ -132,5 +132,7 @@ All geometries are stored in the **S-JTSK / Krovak East North (EPSG:5514)** coor
 
 You are free to share, adapt, and build upon the materials for any purpose, provided appropriate credit is given.
 
+If you use the GMAI dataset, please cite:
+Hudcovič, M. (2025). Grassland Management from Aerial Imagery (GMAI) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.17350381
 
 

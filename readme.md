@@ -80,6 +80,10 @@ Hosted on **Zenodo**:
 │   └── dataset.yaml           # Configuration file specifying dataset paths, class names, and train/val/test splits for YOLO training
 │      
 ├── YOLO11x_GMAI.pt            # PyTorch checkpoint of the YOLO11x model trained on the GMAI dataset
+│
+├── GMAI_OD_results.gpkg       # Results across the three Slovak orthophoto cycles (2017–2023)
+│
+└── demo_data.zip              # Contains exemplary data for running the workflow in the Google Colab notebook (for demonstration and replication)
 ```
 > **Note:**  
 > In *dataset.zip*, all files whose names end with a non-numeric character correspond to augmented data instances, while numeric suffixes indicate original samples.
@@ -90,7 +94,17 @@ A full end-to-end workflow is available in the accompanying Google Colab noteboo
 
 ## Results
 
-Results of our study are hosted on Zenodo.
+Results of our study are provided as a GeoPackage file hosted on Zenodo.  
+Each polygon in the dataset contains a set of attributes describing:
+
+- **Predicted class** (class_id/class_name : 0/Cattle, 1/Haybale round, 2/Square haybale, 3/Haystack, 4/Horse, 5/Machinery, 6/Sheep)
+- **Type of management practice** (mowing/grazing)
+- **Prediction confidence** of the YOLO11x model (confidence)
+- **Acquisition date** of the orthophoto from which the object was detected (Datum)
+
+All geometries are stored in the **S-JTSK / Krovak East North (EPSG:5514)** coordinate reference system.
+
+<img src="assets/example.png" width="2000" alt="Example">
 
 **Predictions Across Slovak Orthophotomosaic Cycles**
 
@@ -114,7 +128,9 @@ Results of our study are hosted on Zenodo.
 
 ## License
 
-MIT
+**Creative Commons Attribution 4.0 International (CC BY 4.0)**
+
+You are free to share, adapt, and build upon the materials for any purpose, provided appropriate credit is given.
 
 
 

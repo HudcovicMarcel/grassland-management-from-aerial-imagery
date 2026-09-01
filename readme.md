@@ -28,7 +28,7 @@
 
 This repository serves as **supplementary material** and **release** of the code and dataset for the paper:
 
-*Country-wide object detection of grassland management practices from aerial imagery using deep learning, case study: Slovak Republic* **(in preparation)**.
+*Monitoring grassland management practices from nationwide aerial imagery using deep learning* **Preprint: http://dx.doi.org/10.2139/ssrn.7384227 <a href="http://dx.doi.org/10.2139/ssrn.7384227">**.
 
 Our study trains the **YOLO11** model (Jocher & Qiu, 2024) to detect objects representing grassland management practices in aerial imagery from the third cycle of the orthophotomosaic from the western part of **Slovak Republic** (2023), with a ground sampling distance of **15 cm**.
 

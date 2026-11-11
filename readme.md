@@ -13,8 +13,8 @@
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab">
   </a>
   
-  <a href="https://doi.org/10.5281/zenodo.17350381">
-    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17350381.svg" alt="DOI"></a>
+  <a href="https://doi.org/10.5281/zenodo.24108529">
+    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.24108529.svg" alt="DOI">
   </a>
 
   <a href="https://www.grass4b.com/_sub/">
@@ -32,34 +32,30 @@ This repository serves as **supplementary material** and **release** of the code
 
 **Preprint: http://dx.doi.org/10.2139/ssrn.7384227 <a href="http://dx.doi.org/10.2139/ssrn.7384227">**
 
+The repository and dataset were updated after the revision of the paper submitted to *Ecological Informatics*.
+
 Our study trains the **YOLO11** model (Jocher & Qiu, 2024) to detect objects representing grassland management practices in aerial imagery from the third cycle of the orthophotomosaic from the western part of **Slovak Republic** (2023), with a ground sampling distance of **15 cm**.
 
 ## Dataset content
 
-This dataset consist 1147 manually labeled images (1280x1280px) that were further augmented, and split into Train (~60%), Test (~20%), and Validation (~20%) sets.
+The dataset consists of **929 manually labeled model tiles** (1280x1280px, RGB, 15 cm) derived from **373 source tiles** (2.5 × 2 km) of the 2023 orthophotomosaic, with **24,318 bounding boxes**. The tiles were split **by source tile** into Train (~60%), Validation (~20%) and Test (~20%) subsets, so that overlapping tiles never occur in different subsets. Augmentation (flips and 90° rotations) was applied to the **training subset only**.
 
-**Count of labels for each class:**
-| Class           | Type       | Train | Test | Val  |
-|-----------------|------------|-------|------|------|
-| Cattle          | Original   | 4875  | 1935 | 1737 |
-|                 | Augmented  | 5646  | 1602 | 1683 |
-| Sheep           | Original   | 4242  | 1184 | 2224 |
-|                 | Augmented  | 5733  | 1604 | 1621 |
-| Horse           | Original   | 759   | 241  | 227  |
-|                 | Augmented  | 4944  | 1730 | 1915 |
-| Round Haybale   | Original   | 3522  | 1183 | 877  |
-|                 | Augmented  | 4027  | 1189 | 1134 |
-| Square Haybale  | Original   | 461   | 209  | 309  |
-|                 | Augmented  | 3860  | 1568 | 1425 |
-| Haystack        | Original   | 163   | 30   | 31   |
-|                 | Augmented  | 945   | 282  | 341  |
-| Machinery       | Original   | 75    | 15   | 19   |
-|                 | Augmented  | 448   | 161  | 154  |
+**Count of labels (bounding boxes) for each class:**
+| Class           | Train (original) | Train (augmented copies) | Val   | Test  |
+|-----------------|------------------|--------------------------|-------|-------|
+| Cattle          | 5,131            | 5,263                    | 1,708 | 1,708 |
+| Sheep           | 4,564            | 4,948                    | 1,550 | 1,536 |
+| Horse           | 737              | 5,159                    | 245   | 245   |
+| Round hay bale  | 3,349            | 3,499                    | 1,117 | 1,116 |
+| Square hay bale | 586              | 4,102                    | 207   | 186   |
+| Haystack        | 135              | 945                      | 44    | 45    |
+| Machinery       | 65               | 455                      | 22    | 22    |
+| **Tiles**       | 557              | 1,811                    | 186   | 186   |
 
 > **Note:**  
-> - The applied augmentation techniques are described in the paper.  
-> - **Original** - labels on non-augmented images.  
-> - **Augmented** - labels on augmented images.
+> - The applied augmentation technique is described in the paper and implemented in the notebook (step 1.5).  
+> - **Original** - labels on the original tiles.  
+> - **Augmented copies** - labels on the rotated and flipped copies, which exist in the training subset only.
 
 ## Data
 
@@ -67,28 +63,39 @@ Hosted on **Zenodo**:
 
 ```bash
 
-10.5281/zenodo.17350381/
+10.5281/zenodo.24108529/
 │
-├── dataset.zip/               # Augmented and split images used for YOLO11 training and validation
-│   ├── train/                 # Training subset ≈ 60%
-│   │   ├── images/ 
-│   │   └── labels/ 
-│   ├── test/                  # Test subset ≈ 20%
-│   │   ├── images/
-│   │   └── labels/ 
-│   ├── val/                   # Val subset ≈ 20%
-│   │   ├── images/
-│   │   └── labels/ 
-│   └── dataset.yaml           # Configuration file specifying dataset paths, class names, and train/val/test splits for YOLO training
+├── dataset.zip/               # Images and labels used for YOLO11 training, validation and testing
+│   └── dataset/
+│       ├── train/             # Training subset ≈ 60% of the tiles, with augmented copies
+│       │   ├── images/ 
+│       │   └── labels/ 
+│       ├── val/               # Validation subset ≈ 20%, original tiles only
+│       │   ├── images/
+│       │   └── labels/ 
+│       ├── test/              # Test subset ≈ 20%, original tiles only
+│       │   ├── images/
+│       │   └── labels/ 
+│       └── dataset.yaml       # Configuration file specifying dataset paths, class names, and train/val/test splits for YOLO training
 │      
-├── YOLO11x_GMAI.pt            # PyTorch checkpoint of the YOLO11x model trained on the GMAI dataset
+├── YOLO11x_GMAI.pt            # PyTorch checkpoint of the final YOLO11x model trained on the GMAI dataset
 │
 ├── GMAI_OD_results.gpkg       # Results across the three Slovak orthophoto cycles (2017–2023)
 │
 └── demo_data.zip              # Contains exemplary data for running the workflow in the Google Colab notebook (for demonstration and replication)
 ```
 > **Note:**  
-> In *dataset.zip*, all files whose names end with a non-numeric character correspond to augmented data instances, while numeric suffixes indicate original samples.
+> In *dataset.zip*, model tiles are named `<source tile>_<tile id>`. Files with a suffix after the numeric tile id are augmented copies: `_flipped` (rotated by 180°), `_flipped_hor`, `_flipped_ver`, `_rotate_90`, `_rotate_90_ccw`, `_rotate_90_ccw_flip_hor` and `_rotate_90_ccw_flip_ver`.
+
+## Model performance
+
+The final model, **YOLO11x** (COCO-pretrained, SGD, batch size 16), was selected on the validation subset and evaluated once on the test subset:
+
+| Precision | Recall | F1    | mAP50 | mAP50-95 |
+|-----------|--------|-------|-------|----------|
+| 0.836     | 0.770  | 0.794 | 0.842 | 0.561    |
+
+On independent validation samples from the first and second cycles, resized to 15 cm, the model reached a mAP50 of 0.694 and 0.778, respectively.
 
 ## Usage
 
@@ -99,26 +106,42 @@ A full end-to-end workflow is available in the accompanying Google Colab noteboo
 Results of our study are provided as a GeoPackage file hosted on Zenodo.  
 Each polygon in the dataset contains a set of attributes describing:
 
-- **Predicted class** (class_id/class_name : 0/Cattle, 1/Haybale round, 2/Square haybale, 3/Haystack, 4/Horse, 5/Machinery, 6/Sheep)
+- **Predicted class** (class_id/class_name : 0/Cattle, 1/Haybale_round, 2/Haybale_square, 3/Haystack, 4/Horse, 5/Machinery, 6/Sheep)
 - **Type of management practice** (mowing/grazing)
-- **Prediction confidence** of the YOLO11x model (confidence)
+- **Prediction confidence** of the YOLO11x model (confidence ≥ 0.3)
 - **Acquisition date** of the orthophoto from which the object was detected (Datum)
 
 All geometries are stored in the **S-JTSK / Krovak East North (EPSG:5514)** coordinate reference system.
 
-<img src="assets/example.png" width="2000" alt="Example">
+**Examples of detections** (left: 192 m area with all detections; right: detail of the dashed window)
+
+*Cattle and round hay bales, first cycle imagery*
+
+<img src="assets/results_cycle1.jpg" width="2000" alt="Cattle and round hay bale detection from first cycle imagery">
+
+*Machinery and sheep, second cycle imagery*
+
+<img src="assets/results_cycle2.jpg" width="2000" alt="Machinery and sheep detection from second cycle imagery">
+
+*Haystacks and horses, third cycle imagery (2023)*
+
+<img src="assets/results_cycle3.jpg" width="2000" alt="Haystack and horse detection from third cycle imagery">
 
 **Predictions Across Slovak Orthophotomosaic Cycles**
 
-| Class           | 2017   | 2018   | 2019   | 2020  | 2021   | 2022   | 2023  |
-|-----------------|--------|--------|--------|-------|--------|--------|-------|
-| **Cattle**       | 7,203  | 23,470 | 33,507 | 6,402 | 37,262 | 31,872 | 10,056 |
-| **Sheep**        | 5,074  | 77,426 | 97,192 | 8,143 | 83,338 | 60,419 | 6,277  |
-| **Horse**        | 1,028  | 1,502  | 468    | 894   | 1,454  | 1,367  | 1,767  |
-| **Round Haybale**| 2,764  | 30,634 | 40,014 | 7,465 | 56,751 | 27,802 | 6,738  |
-| **Square Haybale**| 148   | 362    | 971    | 84    | 820    | 174    | 80     |
-| **Haystack**     | 116    | 360    | 176    | 72    | 769    | 38     | 301    |
-| **Machinery**    | 206    | 401    | 455    | 249   | 596    | 278    | 253    |
+| Class               | 2017   | 2018    | 2019    | 2020   | 2021    | 2022    | 2023   |
+|---------------------|--------|---------|---------|--------|---------|---------|--------|
+| **Cattle**          | 7,023  | 25,147  | 31,048  | 6,422  | 36,769  | 31,105  | 10,832 |
+| **Sheep**           | 5,835  | 70,764  | 121,375 | 7,175  | 110,235 | 78,976  | 6,780  |
+| **Horse**           | 1,051  | 1,508   | 428     | 896    | 1,447   | 953     | 1,962  |
+| **Round hay bale**  | 3,279  | 33,080  | 44,277  | 9,143  | 62,948  | 34,255  | 8,695  |
+| **Square hay bale** | 170    | 314     | 1,900   | 104    | 844     | 174     | 157    |
+| **Haystack**        | 94     | 307     | 117     | 81     | 753     | 79      | 379    |
+| **Machinery**       | 226    | 308     | 383     | 418    | 757     | 276     | 357    |
+| **Total**           | 17,678 | 131,428 | 199,528 | 24,239 | 213,753 | 145,818 | 29,162 |
+
+> **Note:**  
+> The file includes detections on grassland plots above 1200 m a.s.l. The analyses in the paper exclude these plots, because false-positive sheep detections on rocky outcrops dominate there.
 
 ## Credits
 
@@ -135,6 +158,4 @@ All geometries are stored in the **S-JTSK / Krovak East North (EPSG:5514)** coor
 You are free to share, adapt, and build upon the materials for any purpose, provided appropriate credit is given.
 
 If you use the GMAI dataset, please cite:
-Hudcovič, M. (2025). Grassland Management from Aerial Imagery (GMAI) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.17350381
-
-
+Hudcovič, M. (2026). Grassland Management from Aerial Imagery (GMAI) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.24108529

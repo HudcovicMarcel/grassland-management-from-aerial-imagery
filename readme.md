@@ -53,7 +53,7 @@ The dataset consists of **929 manually labeled model tiles** (1280x1280px, RGB, 
 | **Tiles**       | 557              | 1,811                    | 186   | 186   |
 
 > **Note:**  
-> - The applied augmentation technique is described in the paper and implemented in the notebook (step 1.5).  
+> - The applied augmentation technique is described in the paper and implemented in the notebook.  
 > - **Original** - labels on the original tiles.  
 > - **Augmented copies** - labels on the rotated and flipped copies, which exist in the training subset only.
 
